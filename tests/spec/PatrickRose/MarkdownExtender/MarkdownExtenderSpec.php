@@ -58,4 +58,8 @@ class MarkdownExtenderSpec extends ObjectBehavior
         $this->compile("[{youtube:BgAdeuxkUyY}][{youtube:BgAdeuxkUyY}]")->shouldReturn("<p><iframe width=\"560\" height=\"315\" src=\"//www.youtube.com/embed/BgAdeuxkUyY\" frameborder=\"0\" allowfullscreen></iframe><iframe width=\"560\" height=\"315\" src=\"//www.youtube.com/embed/BgAdeuxkUyY\" frameborder=\"0\" allowfullscreen></iframe></p>" . PHP_EOL);
     }
 
+    function it_can_embed_videmo_links() {
+        $this->compile("[{vimeo:95810934}]")->shouldReturn("<p><iframe src=\"//player.vimeo.com/video/95810934\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></p>" . PHP_EOL);
+    }
+
 }
