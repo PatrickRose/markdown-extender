@@ -1,0 +1,26 @@
+{
+    "name": "patrickrose/markdown-extender",
+    "license": "MIT",
+    "keywords": ["markdown"],
+    "description": "Extend Markdown extra with ease",
+    "authors": [
+        {
+            "name": "Patrick Rose",
+            "email": "pjr0911025@googlemail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "michelf/php-markdown": "~1.4",
+        "illuminate/support": "~4"
+    },
+    "autoload": {
+        "psr-0": {
+            "PatrickRose\\MarkdownExtender": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpspec/phpspec": "*"
+    }
+}
