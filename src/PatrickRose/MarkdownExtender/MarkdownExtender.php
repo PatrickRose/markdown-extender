@@ -11,7 +11,7 @@ class MarkdownExtender
 
     public function compile($text)
     {
-        $compiled = MarkdownExtra::defaultTransform($text);
+        $compiled = $this->compileMarkdownExtra($text);
         if (preg_match_all("/\[\{(.*?)\}\]/", $compiled, $extensions)) {
             foreach ($extensions[0] as $key => $extension) {
                 $functionCall = explode(":", $extensions[1][$key]);
@@ -22,7 +22,7 @@ class MarkdownExtender
                 } elseif (array_key_exists($method, static::$extensions)) {
                     $replacement = $this->call_extension($method, $args);
                 } else {
-                    throw new InvalidMethodCallException("{method} is not a valid extension");
+                    throw new InvalidMethodCallException("{$method} is not a valid extension");
                 }
                 $compiled = str_replace($extension, $replacement, $compiled);
             }
@@ -39,6 +39,23 @@ class MarkdownExtender
     protected function vimeo($id)
     {
         return "<iframe src=\"//player.vimeo.com/video/{$id}\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>";
+    }
+
+    protected function description()
+    {
+        // Oh how I wish I could use variadic functions now. HURRY UP PHP5.6!
+        $args = func_get_args();
+        $list = "<dl>";
+        foreach ($args as $item) {
+            $split = explode("|", $item);
+            if (!isset($split[1])) {
+                throw new InvalidMethodCallException("Couldn't find the '|' character in a [{description}] argument");
+            }
+            $list .= "<dt>{$split[0]}</dt><dd>{$split[1]}</dd>";
+        }
+        $list .= "</dl>";
+
+        return $list;
     }
 
     public function extend($marker, Callable $function)
@@ -87,5 +104,18 @@ class MarkdownExtender
             default:
                 return call_user_func_array($function(), $args);
         }
+    }
+
+    /**
+     * @param $text
+     * @return string
+     */
+    private function compileMarkdownExtra($text)
+    {
+        $compiled = MarkdownExtra::defaultTransform($text);
+        // Remove the annoy PHP_EOL at the end of the string
+        $compiled = substr($compiled, 0, strlen($compiled) - 1);
+
+        return $compiled;
     }
 }
