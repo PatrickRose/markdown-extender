@@ -18,14 +18,19 @@ Add the following to your `composer.json`.
 ## Usage
 
 Build up your markdown string and pass it to the `compile` function. Extensions are
-handled using the syntax `[{extensionName:arg1,arg2,arg3}]` in your markdown. Currently
-there is a youtube embedding function provided already, which is handled using the
-`[{youtube:youtubeID}]` syntax.
+handled using the syntax `[{extensionName:arg1,arg2,arg3}]` in your markdown.
 
 If you need a new function then you can add it using
 `extend($extensionName, $extensionFunction)`, where $extensionName is the string to use
 inside the `[{}]` block and $extensionFunction is a closure that takes any number of
 arguments and returns a string.
+
+### Current Functions
+
+* Youtube Embedding: `[{youtube:youtubeID}]` => `<iframe width="560" height="315" src="//www.youtube.com/embed/BgAdeuxkUyY" frameborder="0" allowfullscreen></iframe>`
+* Vimeo Embedding: `[{vimeo:vimeoID}]` => `<iframe src="//player.vimeo.com/video/95810934" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`
+* Tweet Embedding: `[{twitter:tweetID}]` => `<blockquote class="twitter-tweet"><p>Search API will now always return &quot;real&quot; Twitter user IDs. The with_twitter_user_id parameter is no longer necessary. An era has ended. ^TS</p>&mdash; Twitter API (@twitterapi) <a href="https://twitter.com/twitterapi/statuses/133640144317198338">November 7, 2011</a></blockquote>\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`
+* Description Lists: `[{description:item1|description1,item2|description2}]` => `<dl><dt>first</dt><dd>first text</dd><dt>second</dt><dd>second text</dd></dl>`
 
 ## Example
 
