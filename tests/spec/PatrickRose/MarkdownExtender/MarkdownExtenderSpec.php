@@ -90,9 +90,4 @@ class MarkdownExtenderSpec extends ObjectBehavior
         );
     }
 
-    function it_can_create_twitter_links()
-    {
-        $this->compile("[{twitter:133640144317198338}]")->shouldReturn("<p><blockquote class=\"twitter-tweet\"><p>Search API will now always return &quot;real&quot; Twitter user IDs. The with_twitter_user_id parameter is no longer necessary. An era has ended. ^TS</p>&mdash; Twitter API (@twitterapi) <a href=\"https://twitter.com/twitterapi/statuses/133640144317198338\">November 7, 2011</a></blockquote>\n<script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script></p>");
-    }
-
 }

@@ -59,15 +59,6 @@ class MarkdownExtender
         return $list;
     }
 
-    protected function twitter($id)
-    {
-        $client = new Client();
-        $response = $client->get("https://api.twitter.com/1/statuses/oembed.json?id={$id}")->json();
-
-
-        return $response['html'];
-    }
-
     public function extend($marker, Callable $function)
     {
         static::$extensions[$marker] = $function;

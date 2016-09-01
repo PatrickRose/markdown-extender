@@ -10,10 +10,9 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.6.0",
         "michelf/php-markdown": "~1.4",
-        "illuminate/support": "~4",
-        "guzzlehttp/guzzle": "~4"
+        "illuminate/support": "~5"
     },
     "autoload": {
         "psr-0": {
@@ -22,6 +21,6 @@
     },
     "minimum-stability": "stable",
     "require-dev": {
-        "phpspec/phpspec": "*"
+        "phpspec/phpspec": "^3.0"
     }
 }
