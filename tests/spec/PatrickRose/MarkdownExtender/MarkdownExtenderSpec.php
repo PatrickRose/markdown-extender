@@ -51,6 +51,8 @@ class MarkdownExtenderSpec extends ObjectBehavior
         $this->extensions()->shouldReturn(
             [
                 "youtube",
+                "vimeo",
+                "description",
                 "foobar"
             ]
         );

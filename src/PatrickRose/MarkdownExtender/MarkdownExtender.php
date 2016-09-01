@@ -42,12 +42,11 @@ class MarkdownExtender
         return "<iframe src=\"//player.vimeo.com/video/{$id}\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>";
     }
 
-    protected function description()
+    protected function description(...$items)
     {
         // Oh how I wish I could use variadic functions now. HURRY UP PHP5.6!
-        $args = func_get_args();
         $list = "<dl>";
-        foreach ($args as $item) {
+        foreach ($items as $item) {
             $split = explode("|", $item);
             if (!isset($split[1])) {
                 throw new InvalidMethodCallException("Couldn't find the '|' character in a [{description}] argument");
@@ -66,7 +65,7 @@ class MarkdownExtender
 
     public function extensions()
     {
-        $extensions = ["youtube"];
+        $extensions = ["youtube", "vimeo", "description"];
         foreach (static::$extensions as $key => $value) {
             $extensions[] = $key;
         }
